@@ -1,6 +1,7 @@
-var React = require("react");
+    var React = require('react');
 
-var TodoBox = React.createClass({
+    var TodoBox = React.createClass({
+      // Omitted
       render: function() {
         return (
           <div className="todoBox">
@@ -8,23 +9,42 @@ var TodoBox = React.createClass({
             <TodoList />
             <TodoForm />
           </div>
-        );
-      }
-    });
-    
-    var TodoList = React.createClass({
-      // Write code here
-      render: function(){
-        return (
-          <div className="todoList">
-            I am a TodoList.
-          </div>
           );
       }
     });
-    
-    var TodoForm = React.createClass({
+
+    var TodoList = React.createClass({
+      render: function() {
+        return (
+          <div className = "todoList">
+            <table style={{border: "2px solid black"}}>
+              <tbody>
+                <Todo title="Shopping">Milk</Todo>
+                <Todo title="Hair cut">13:00</Todo>
+              </tbody>
+            </table>
+          </div>
+        );
+      }
+    });
+
+    var Todo = React.createClass({
       // Write code here
+      protoTypes: {
+        title: React.PropTypes.number.isRequired
+      },
+      render: function(){
+        return (
+          <tr>
+            <td style={{border: "1px solid black"}}>{this.props.title}</td>
+            <td style={{border: "1px solid black"}}>{this.props.children}</td>
+          </tr>
+          );
+      }
+    });
+
+    var TodoForm = React.createClass({
+      // Omitted
       render: function(){
         return (
           <div className="todoForm">
@@ -33,5 +53,5 @@ var TodoBox = React.createClass({
           );
       }
     });
-    
-module.exports = TodoBox;
+
+    module.exports = TodoBox;
