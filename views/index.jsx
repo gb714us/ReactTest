@@ -1,7 +1,15 @@
 var React = require('react');
 
 var style = {
-  border: "1px solid black"
+  checkedTodo: {
+    textDecoration: "line-through"
+  },
+  notChecked: {
+    textDecoration: 'none'
+  },
+  tableContent: {
+    border: "1px solid black"
+    }
 };
 
 
@@ -37,21 +45,32 @@ var TodoList = React.createClass({
 
 var Todo = React.createClass({
   getInitialState: function(){
-    return {checked: false};
+    return {checked: false, style: style.notChecked};
   },
   // Write code here
   handleChange: function(e){
     this.setState({checked: e.target.checked});
+    if (e.target.checked) {
+          this.setState({
+            TodoStyle: style.checkedTodo
+          });
+        } else {
+          this.setState({
+            TodoStyle: style.notCheckedTodo
+          });
+        }
+    // e.target.checked ? this.setState({style: style.checkedTodo})
+    //                   : this.setState({style: style.notChecked});
   },
   protoTypes: {
     title: React.PropTypes.number.isRequired
   },
   render: function(){
     return (
-      <tr>
-        <td style={style}><input type="checkbox" checked={this.state.checked} onChange={this.handleChange} /></td>
-        <td style={style}>{this.props.title}</td>
-        <td style={style}>{this.props.children}</td>
+      <tr style={this.state.style}>
+        <td style={style.tableContent}><input type="checkbox" checked={this.state.checked} onChange={this.handleChange} /></td>
+        <td style={style.tableContent}>{this.props.title}</td>
+        <td style={style.tableContent}>{this.props.children}</td>
       </tr>
     );
   }
